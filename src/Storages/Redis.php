@@ -56,4 +56,22 @@ final class Redis implements CacheStorageInterface
     {
         return $this->redisClient->set($cacheId, $data);
     }
+
+    /**
+     * remove data from storage by cache id
+     * @param  string $cacheId cache identifier
+     * @return boolean true if cache is successfully removed
+     */
+    public function remove($cacheId)
+    {
+        return ($this->redisClient->del($cacheId) === 1);
+    }
+
+    /**
+     * remove all data from storage
+     */
+    public function clear()
+    {
+        $this->redisClient->flushall();
+    }
 }
