@@ -50,11 +50,12 @@ final class Redis implements CacheStorageInterface
      * write data to storage by cache name
      * @param  string $cacheId cache identifier
      * @param  string $data item to cache in serialized format
+     * @param  int $ttl time to live
      * @return int number of bytes written
      */
-    public function write($cacheId, $data)
+    public function write($cacheId, $data, $ttl)
     {
-        return $this->redisClient->set($cacheId, $data);
+        return $this->redisClient->setex($cacheId, $ttl, $data);
     }
 
     /**
