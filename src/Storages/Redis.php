@@ -43,7 +43,7 @@ final class Redis implements CacheStorageInterface
      */
     public function read($cacheId)
     {
-        return $this->redisClient->get($cacheId);
+        return unserialize($this->redisClient->get($cacheId));
     }
 
     /**
@@ -55,7 +55,8 @@ final class Redis implements CacheStorageInterface
      */
     public function write($cacheId, $data, $ttl)
     {
-        return $this->redisClient->setex($cacheId, $ttl, $data);
+        $serializedData = serialize($data);
+        return $this->redisClient->setex($cacheId, $ttl, $serializedData);
     }
 
     /**
