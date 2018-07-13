@@ -22,7 +22,7 @@ Run through composer
 
     $cache = new \Juhara\ZzzCache\Cache(
         $redisCache,
-        new \Juhara\ZzzCache\Helpers\TimeUtility()
+        new \Juhara\ZzzCache\Helpers\ExpiryCalculator()
     );
 
 # Contributing
